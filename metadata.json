@@ -1,0 +1,5 @@
+{
+  "name": "HTML Version Comparator",
+  "description": "An intelligent web application that allows users to upload two versions of an HTML file, compares them to identify differences in test case tables, and uses the Gemini API to provide a human-readable summary of the changes.",
+  "requestFramePermissions": []
+}
