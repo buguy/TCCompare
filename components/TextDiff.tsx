@@ -65,7 +65,7 @@ export const TextDiff: React.FC<TextDiffProps> = ({ originalText, revisedText })
   if (originalText === revisedText) {
     return <span dangerouslySetInnerHTML={{ __html: originalText }} />;
   }
-  
+
   const diffs = createDiff(originalText, revisedText);
 
   return (

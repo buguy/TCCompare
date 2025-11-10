@@ -7,6 +7,8 @@ interface ComparisonResultDisplayProps {
   result: ComparisonResult;
   summary: string;
   mode: 'step' | 'content';
+  originalFileName?: string;
+  revisedFileName?: string;
 }
 
 const getRowClass = (status: ChangeType) => {
@@ -83,7 +85,7 @@ const stripColorStyles = (htmlString: string): string => {
 };
 
 
-export const ComparisonResultDisplay: React.FC<ComparisonResultDisplayProps> = ({ result, summary, mode }) => {
+export const ComparisonResultDisplay: React.FC<ComparisonResultDisplayProps> = ({ result, summary, mode, originalFileName = 'Original', revisedFileName = 'Revised' }) => {
   const { rows: pairedRows } = result;
   const [showOnlyChanges, setShowOnlyChanges] = useState(false);
 
@@ -139,19 +141,19 @@ export const ComparisonResultDisplay: React.FC<ComparisonResultDisplayProps> = (
               {mode === 'step' ? (
                   <tr>
                     <th scope="col" className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-[2%] border-r border-gray-200">Step Order</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Original Procedure</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Original Expected Outcome</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Revised Procedure</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%]">Revised Expected Outcome</th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Procedure_<span className="font-bold">{originalFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Expected Outcome_<span className="font-bold">{originalFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Procedure_<span className="font-bold">{revisedFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%]">Expected Outcome_<span className="font-bold">{revisedFileName}</span></th>
                   </tr>
               ) : (
                   <tr>
-                    <th scope="col" className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-[2%] border-r border-gray-200">Step Order (Original)</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Original Procedure</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Original Expected Outcome</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Revised Procedure</th>
-                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Revised Expected Outcome</th>
-                    <th scope="col" className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-[2%]">Step Order (Revised)</th>
+                    <th scope="col" className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-[2%] border-r border-gray-200">Step Order_<span className="font-bold">{originalFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Procedure_<span className="font-bold">{originalFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Expected Outcome_<span className="font-bold">{originalFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Procedure_<span className="font-bold">{revisedFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-[24%] border-r border-gray-200">Expected Outcome_<span className="font-bold">{revisedFileName}</span></th>
+                    <th scope="col" className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-[2%]">Step Order_<span className="font-bold">{revisedFileName}</span></th>
                   </tr>
               )}
             </thead>

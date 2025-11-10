@@ -23,6 +23,12 @@ const getCleanTextContent = (htmlString: string): string => {
     }
 };
 
+const extractTcPattern = (fileName: string | undefined): string | undefined => {
+    if (!fileName) return undefined;
+    const match = fileName.match(/TC-\d+\.\d+/);
+    return match ? match[0] : fileName;
+};
+
 const processRawData = (rawData: any[][]): RowData[] => {
     if (!rawData || rawData.length === 0) {
         return [];
@@ -300,7 +306,7 @@ const App: React.FC = () => {
         <header className="text-center mb-10">
           <div className="flex justify-center items-center gap-4 mb-4">
             <HtmlIcon className="h-12 w-12 text-orange-600" />
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">HTML Version Comparator</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">TestCase Version Comparator</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Upload original and revised HTML files to see an AI-powered summary of the changes.
@@ -384,7 +390,13 @@ const App: React.FC = () => {
 
         {comparisonResult && (
           <div className="mt-12">
-            <ComparisonResultDisplay result={comparisonResult} summary={geminiSummary} mode={comparisonMode} />
+            <ComparisonResultDisplay
+              result={comparisonResult}
+              summary={geminiSummary}
+              mode={comparisonMode}
+              originalFileName={extractTcPattern(originalFile?.name)}
+              revisedFileName={extractTcPattern(revisedFile?.name)}
+            />
           </div>
         )}
       </main>
