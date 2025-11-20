@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FileUploader } from './components/FileUploader';
 import { ComparisonResultDisplay } from './components/ComparisonResultDisplay';
+import { BackToTop } from './components/BackToTop';
 import { parseHtmlFile } from './services/excelParser';
 import { getChangesSummary } from './services/geminiService';
 import { ComparisonResult, RowData, ChangeType, ComparisonRowPair } from './types';
@@ -400,6 +401,7 @@ const App: React.FC = () => {
           </div>
         )}
       </main>
+      <BackToTop />
     </div>
   );
 };
